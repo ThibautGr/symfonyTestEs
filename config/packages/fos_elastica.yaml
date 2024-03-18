@@ -1,0 +1,32 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
+fos_elastica:
+  clients:
+    default: { host: localhost, port: 9209 }
+  indexes:
+      produit:
+          persistence:
+              driver: orm
+              model: App\Entity\Produit
+              provider: ~
+              finder: ~
+          properties:
+              nom: ~
+              id: ~
+              description: ~
+              createdAt:
+                type: date
+      client:
+        persistence:
+          driver: orm
+          model: App\Entity\Client
+          provider: ~
+          finder: ~
+        properties:
+          nom:
+          id:
+          email:
+      clientdto:
+        model: App\DTO\ClientDTO
+        mappings:
+          nom:
+            type: "string"

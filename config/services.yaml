@@ -19,6 +19,28 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+#    search_controller.finder:
+#        class: App\Controller\SearchController
+#        autowire: false
+#        arguments:
+#            - '@knp_paginator'
+#            - '@fos_elastica.finder.app.produit'
+
+    App\Controller\SearchController:
+        tags: [ 'controller.service_arguments' ]
+        arguments:
+            - '@knp_paginator'
+            - '@fos_elastica.finder.produit'
+
+
+
+    #        tags:
+    #            - controller.service_arguments
+#    App/Controller/SearchController:
+#        tags:
+#            - controller.service_arguments
+#        public: true
+
