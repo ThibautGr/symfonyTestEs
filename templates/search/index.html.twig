@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+        <div class="container">
+            {{ form_start(form) }}
+            {{ form_row(form.query) }}
+            {{ form_row(form.produit) }}
+            {{ form_row(form.createdThisMonth) }}
+            <button >Search</button>
+                 {{ form_end(form) }}
+        </div>
+
+    <div>
+        {% if pagination is not empty %}
+            <h1>Search result : {{ pagination.totalItemCount}} </h1>
+            <tr>
+                {% for produit in pagination %}
+                        <td>{{ produit.id }}</td>
+                        <td>{{ produit.nom }}</td>
+                        <td>{{ produit.description }}</td>
+                        <td>{{ produit.prix }}</td>
+                        <td>{{ produit.createdAt|date("m/d/Y") }}</td>
+                        <td>{{ produit.updatedAt|date("m/d/Y") | default("-") }}</td>
+                        <td>
+                            <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
+                            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+                        </td>
+                {% endfor %}
+            </tr>
+            {{ knp_pagination_render(pagination, null, {},{
+                'align': 'center',
+            }) }}
+        {% endif %}
+    </div>
+{% endblock %}
